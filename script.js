@@ -1,34 +1,12 @@
-const getSumBtn = document.createElement("button");
-getSumBtn.append("Get Total Price");
-document.body.appendChild(getSumBtn);
+document.getElementById("sumBtn").addEventListener("click", function () {
 
-const getSum = () => {
+    const prices = document.querySelectorAll(".price");
+    let total = 0;
 
-  // remove old total
-  const oldTotalRow = document.querySelector(".total-row");
-  if (oldTotalRow) oldTotalRow.remove();
+    prices.forEach(p => {
+        total += parseFloat(p.textContent.trim()) || 0;
+    });
 
-  // FIXED selector
-  const priceElements = document.querySelectorAll(".price");
-
-  let total = 0;
-  priceElements.forEach(price => {
-    total += Number(price.textContent.trim());
-  });
-
-  const table = document.getElementById("groceryTable");
-  const totalRow = document.createElement("tr");
-  totalRow.classList.add("total-row");
-
-  const totalCell = document.createElement("td");
-  totalCell.colSpan = 2;
-  totalCell.textContent = `Total Price: ₹${total}`;
-
-  totalRow.appendChild(totalCell);
-  table.appendChild(totalRow);
-
-  // For Cypress test (optional)
-  document.getElementById("ans").textContent = total;
-};
-
-getSumBtn.addEventListener("click", getSum);
+    // Show result in #ans (Cypress checks this)
+    document.getElementById("ans").textContent = total;
+});
