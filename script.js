@@ -4,34 +4,31 @@ document.body.appendChild(getSumBtn);
 
 const getSum = () => {
 
-    // Remove previous total row if exists
-    const oldTotalRow = document.querySelector(".total-row");
-    if (oldTotalRow) oldTotalRow.remove();
+  // remove old total
+  const oldTotalRow = document.querySelector(".total-row");
+  if (oldTotalRow) oldTotalRow.remove();
 
-    const priceElements = document.querySelectorAll(".prices");
+  // FIXED selector
+  const priceElements = document.querySelectorAll(".price");
 
-    // Calculate total
-    let total = 0;
-    priceElements.forEach(price => {
-      total += parseFloat(price.textContent);
-    });
+  let total = 0;
+  priceElements.forEach(price => {
+    total += Number(price.textContent.trim());
+  });
 
-    // Create a new row for total
-    const table = document.getElementById("groceryTable");
-    const totalRow = document.createElement("tr");
-    totalRow.classList.add("total-row");
+  const table = document.getElementById("groceryTable");
+  const totalRow = document.createElement("tr");
+  totalRow.classList.add("total-row");
 
-    // Create single cell with colspan = 2
-    const totalCell = document.createElement("td");
-    totalCell.colSpan = 2;
-    totalCell.textContent = `Total Price: ₹${total}`;
+  const totalCell = document.createElement("td");
+  totalCell.colSpan = 2;
+  totalCell.textContent = `Total Price: ₹${total}`;
 
-    // Append cell to row, and row to table
-    totalRow.appendChild(totalCell);
-    table.appendChild(totalRow);
+  totalRow.appendChild(totalCell);
+  table.appendChild(totalRow);
 
-    //Add your code here
-    // (You needed to remove old total row if button clicked again)
+  // For Cypress test (optional)
+  document.getElementById("ans").textContent = total;
 };
 
 getSumBtn.addEventListener("click", getSum);
