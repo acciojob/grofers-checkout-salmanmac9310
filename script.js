@@ -3,7 +3,12 @@ getSumBtn.append("Get Total Price");
 document.body.appendChild(getSumBtn);
 
 const getSum = () => {
-	 const priceElements = document.querySelectorAll(".prices");
+
+    // Remove previous total row if exists
+    const oldTotalRow = document.querySelector(".total-row");
+    if (oldTotalRow) oldTotalRow.remove();
+
+    const priceElements = document.querySelectorAll(".prices");
 
     // Calculate total
     let total = 0;
@@ -24,9 +29,9 @@ const getSum = () => {
     // Append cell to row, and row to table
     totalRow.appendChild(totalCell);
     table.appendChild(totalRow);
-//Add your code here
-  
+
+    //Add your code here
+    // (You needed to remove old total row if button clicked again)
 };
 
 getSumBtn.addEventListener("click", getSum);
-
